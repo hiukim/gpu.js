@@ -5,7 +5,7 @@
  * GPU Accelerated JavaScript
  *
  * @version 2.10.0
- * @date Tue Aug 25 2020 14:05:30 GMT-0400 (Eastern Daylight Time)
+ * @date Mon Sep 07 2020 15:49:38 GMT-0700 (PDT)
  *
  * @license MIT
  * The MIT License
@@ -4634,6 +4634,9 @@ class GLKernel extends Kernel {
     kernel.build();
     kernel.run();
     const result = kernel.renderOutput();
+
+    kernel.context.bufferData(kernel.context.ARRAY_BUFFER, 0, kernel.context.STATIC_DRAW);
+
     kernel.destroy(true);
     return result[0] === 1;
   }
@@ -5528,6 +5531,7 @@ const typeMap = {
 module.exports = {
   GLKernel
 };
+
 },{"../../utils":113,"../kernel":35,"./texture/array-2-float":15,"./texture/array-2-float-2d":13,"./texture/array-2-float-3d":14,"./texture/array-3-float":18,"./texture/array-3-float-2d":16,"./texture/array-3-float-3d":17,"./texture/array-4-float":21,"./texture/array-4-float-2d":19,"./texture/array-4-float-3d":20,"./texture/float":24,"./texture/float-2d":22,"./texture/float-3d":23,"./texture/graphical":25,"./texture/memory-optimized":29,"./texture/memory-optimized-2d":27,"./texture/memory-optimized-3d":28,"./texture/unsigned":32,"./texture/unsigned-2d":30,"./texture/unsigned-3d":31}],13:[function(require,module,exports){
 const { utils } = require('../../../utils');
 const { GLTextureFloat } = require('./float');
