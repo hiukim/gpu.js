@@ -30,6 +30,8 @@ class GLKernel extends Kernel {
   }
 
   static getIsFloatRead() {
+    return false; // this function cause ipad pro failed to run: https://github.com/gpujs/gpu.js/issues/632
+
     const kernelString = `function kernelFunction() {
       return 1;
     }`;
@@ -45,9 +47,6 @@ class GLKernel extends Kernel {
     kernel.build();
     kernel.run();
     const result = kernel.renderOutput();
-
-    // temporary fix
-    kernel.context.bufferData(kernel.context.ARRAY_BUFFER, 0, kernel.context.STATIC_DRAW);
 
     kernel.destroy(true);
     return result[0] === 1;

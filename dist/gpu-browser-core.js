@@ -5,7 +5,7 @@
  * GPU Accelerated JavaScript
  *
  * @version 2.10.0
- * @date Mon Sep 07 2020 15:49:38 GMT-0700 (PDT)
+ * @date Wed Sep 09 2020 17:46:40 GMT-0700 (PDT)
  *
  * @license MIT
  * The MIT License
@@ -4619,6 +4619,8 @@ class GLKernel extends Kernel {
   }
 
   static getIsFloatRead() {
+    return false; 
+
     const kernelString = `function kernelFunction() {
       return 1;
     }`;
@@ -4634,8 +4636,6 @@ class GLKernel extends Kernel {
     kernel.build();
     kernel.run();
     const result = kernel.renderOutput();
-
-    kernel.context.bufferData(kernel.context.ARRAY_BUFFER, 0, kernel.context.STATIC_DRAW);
 
     kernel.destroy(true);
     return result[0] === 1;
